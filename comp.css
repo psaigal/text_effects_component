@@ -3,21 +3,32 @@ h1 {
 }
 
 form {
-	width: 200px;
+	width: 300px;
 	text-align: center;
 	margin: 0 auto;
 }
 
-input {
-	margin-top: 20px;
+#input-text {
+	font-size: 20px;
+	margin-top: 10px;
+	border: 1px solid black; 
+}
+
+.btn {
+	font-size: 15px;
+	margin: 20px 10px 60px 10px;
+	padding: 5px;
+	background-color: darkcyan;
+	color: white;
+	border: 1px solid black;
 }
 
 #result {
-	border: 1px solid red;
+	border: 3px solid darkcyan;
 	width: 300px;
 	height: 100%;
 	margin: 0 auto;
-	margin-top: 20px;
+/*	margin-top: 20px;*/
 	text-align: center;
 	padding: 20px;
 	font-size :20px;
