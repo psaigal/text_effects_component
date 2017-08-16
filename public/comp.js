@@ -1,9 +1,10 @@
-var newComponent = (function(element){
-	'use strict';
+var newComponent = (function(element){ // eslint-disable-line no-unused-vars 
+	"use strict";
 
 	//CACHE DOM
-	function injectElement(element1, element2) {
-		element1.appendChild(element2);
+	function injectElement(elm) {
+		var domElm = document.getElementById(elm);
+		domElm.appendChild(componentContainer);
 	}
 
 	var componentContainer = document.createElement("div");
@@ -11,27 +12,27 @@ var newComponent = (function(element){
 	header.innerHTML = "Transform Your Text!";
 	var f = document.createElement("form");
 	var originalUserText = document.createElement("input"); //input element, text
-	originalUserText.setAttribute('type',"text");
-	originalUserText.setAttribute('name',"text");
-	originalUserText.setAttribute('id',"input-text");
+	originalUserText.setAttribute("type","text");
+	originalUserText.setAttribute("name","text");
+	originalUserText.setAttribute("id","input-text");
 
 	var clearButton = document.createElement("input"); //input element, Clear button
-	clearButton.setAttribute('type',"button");
-	clearButton.setAttribute('value',"Clear");
-	clearButton.setAttribute('id',"clear");
-	clearButton.setAttribute('class',"btn");
+	clearButton.setAttribute("type","button");
+	clearButton.setAttribute("value","Clear");
+	clearButton.setAttribute("id","clear");
+	clearButton.setAttribute("class","btn");
 
 	var reverseButton = document.createElement("input"); //input element, Reverse button
-	reverseButton.setAttribute('type',"button");
-	reverseButton.setAttribute('value',"Reverse");
-	reverseButton.setAttribute('id',"reverse");
-	reverseButton.setAttribute('class',"btn");
+	reverseButton.setAttribute("type","button");
+	reverseButton.setAttribute("value","Reverse");
+	reverseButton.setAttribute("id","reverse");
+	reverseButton.setAttribute("class","btn");
 
 	var pgButton = document.createElement("input"); //input element, Pig Latin button
-	pgButton.setAttribute('type',"button");
-	pgButton.setAttribute('value',"Pig Latin");
-	pgButton.setAttribute('id',"pig-latin");
-	pgButton.setAttribute('class',"btn");
+	pgButton.setAttribute("type","button");
+	pgButton.setAttribute("value","Pig Latin");
+	pgButton.setAttribute("id","pig-latin");
+	pgButton.setAttribute("class","btn");
 
 	f.appendChild(originalUserText);
 	f.appendChild(reverseButton);
@@ -70,7 +71,7 @@ var newComponent = (function(element){
 	function _isVowel(char) {
 		if (char.match(/[a-z]/i)) {
 			char = char.toLowerCase();
-		  	return char === 'a' || char === 'e' || char === 'i' || char === 'o' || char === 'u' || char === "y" || false;
+			return char === "a" || char === "e" || char === "i" || char === "o" || char === "u" || char === "y" || false;
 		}
 	}
 
@@ -78,8 +79,8 @@ var newComponent = (function(element){
 	//PUBLIC API FUNCTIONS
 	function pigLatin(text) {
 		var textArr = text.split(" ");
-	  	for(var i = 0; i <= textArr.length-1; i++) {
-	  		if(textArr[i].match(/[a-z]/i )){
+		for(var i = 0; i <= textArr.length-1; i++) {
+			if(textArr[i].match(/[a-z]/i )){
 				if (_isVowel(textArr[i][0])) {
 					textArr[i] = textArr[i] + "yay";
 				}
@@ -88,12 +89,12 @@ var newComponent = (function(element){
 					var slice = 0;
 					for (var y = 0; y <= (textArr[i].length)-1; y++) {
 						if (!_isVowel(textArr[i][y])) {
-						  suffix += textArr[i].slice(y,y+1);
-						  slice += 1;
+							suffix += textArr[i].slice(y,y+1);
+							slice += 1;
 						}
 						else {
-						  textArr[i] = textArr[i].slice(slice, textArr[i].length) + suffix + "ay";
-						  break;
+							textArr[i] = textArr[i].slice(slice, textArr[i].length) + suffix + "ay";
+							break;
 						}
 					}
 				}
@@ -104,19 +105,19 @@ var newComponent = (function(element){
 
 	
 	function reverseString(text) {
-	  if (text.length > 0 && typeof text === "string") {
-	    var textArr = text.split(" ");
-	    for (var i = 0; i <= textArr.length-1; i++) {
-	      var newStr = "";
-	      var strLength = textArr[i].length;
-	      while (strLength > 0) {
-	        newStr += textArr[i].substring(strLength-1,strLength);
-	        strLength--;
-	      }
-	      textArr[i] = newStr;
-	    }
-	  }
-	  return textArr.join(" ");
+		if (text.length > 0 && typeof text === "string") {
+			var textArr = text.split(" ");
+			for (var i = 0; i <= textArr.length-1; i++) {
+				var newStr = "";
+				var strLength = textArr[i].length;
+				while (strLength > 0) {
+					newStr += textArr[i].substring(strLength-1,strLength);
+					strLength--;
+				}
+				textArr[i] = newStr;
+			}
+		}
+		return textArr.join(" ");
 	}
 
 
@@ -125,10 +126,8 @@ var newComponent = (function(element){
 		resultContainer.innerHTML = newText;
 	}
 
-
- 	document.addEventListener("DOMContentLoaded", function(event) {
-		var varUserInputElement = document.getElementById(element);
- 		injectElement(varUserInputElement, componentContainer); 
+	document.addEventListener("DOMContentLoaded", function() {
+		injectElement(element); 
 
 
 		//BIND EVENTS
@@ -142,8 +141,9 @@ var newComponent = (function(element){
 	//PUBLIC API
 	return {
 		setPigLatin: pigLatin,
-		setReverse: reverseString
-	}
+		setReverse: reverseString,
+		addToDOM: injectElement
+	};
 })("insertContent");
 
 
